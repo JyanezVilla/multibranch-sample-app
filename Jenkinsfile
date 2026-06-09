@@ -14,5 +14,16 @@ pipeline {
                 echo 'Hola Mundo desde Jenkins!'
             }
         }
+        stage('cat README') {
+            when {
+              branch "fix-*"
+            }
+        }
+        stage{
+            sh '''
+              cat README.md
+            '''
+            }
+        }
     }
 }

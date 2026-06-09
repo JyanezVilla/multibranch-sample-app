@@ -1,21 +1,13 @@
 pipeline {
-  agent {label 'linux'}
-  options {
-    buildDiscarder(logRotator(numToKeepStr: '5'))
-  }
-  stages {
-    stage('Build') {
-      steps {
-        sh './gradlew clean check --no-daemon'
-      }
+    agent any
+    options {
+        buildDiscarder logRotator(artifactDaysToKeepSrt: '', artifactNumToKeeSrt: '5', daysToKeepStr: '', numToKeepStr: '5')
     }
-  }
-  post {
-    always {
-        junit(
-          allowEmptyResults: true, 
-          testResults: '**/build/test-results/test/*.xml'
-        )
+    stages {
+        stage('Hola') {
+            steps {
+                echo 'Hola Mundo desde Jenkins!'
+            }
+        }
     }
-  }
 }
